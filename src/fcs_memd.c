@@ -64,6 +64,137 @@ FCSResult fcs_memd_init(FCS handle)
   return FCS_RESULT_SUCCESS;
 }
 
+FCSResult fcs_fcs_memd_set_box_size(FCS handle, fcs_float length_x, fcs_float length_y, fcs_float length_z)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_box_size((void*)handle->method_context, length_x, length_y, length_z);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_time_step(FCS handle, fcs_float timestep)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_time_step((void*)handle->method_context, timestep);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_total_number_of_particles(FCS handle, fcs_int number_of_particles)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_total_number_of_particles((void*)handle->method_context, number_of_particles);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_local_number_of_particles(FCS handle, fcs_int number_of_particles)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_local_number_of_particles((void*)handle->method_context, number_of_particles);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+
+FCSResult fcs_fcs_memd_set_init_flag(FCS handle, fcs_int flagvalue)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_init_flag((void*)handle->method_context, flagvalue);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+
+FCSResult fcs_fcs_memd_set_mesh_size_1D(FCS handle, fcs_int mesh_size)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_mesh_size_1D((void*)handle->method_context, mesh_size);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_speed_of_light(FCS handle, fcs_float lightspeed)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_speed_of_light((void*)handle->method_context, lightspeed);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_permittivity(FCS handle, fcs_float epsilon)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_permittivity((void*)handle->method_context, epsilon);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_temperature(FCS handle, fcs_float temperature)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_temperature((void*)handle->method_context, temperature);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
+
+FCSResult fcs_fcs_memd_set_bjerrum_length(FCS handle, fcs_float bjerrum)
+{
+  FCS_DEBUG_FUNC_INTRO(__func__);
+
+  MEMD_CHECK_RETURN_RESULT(handle, __func__);
+
+  fcs_memd_set_bjerrum_length((void*)handle->method_context, bjerrum);
+
+  FCS_DEBUG_FUNC_OUTRO(__func__, FCS_RESULT_SUCCESS);
+
+  return FCS_RESULT_SUCCESS;
+}
 
 FCSResult fcs_memd_tune(FCS handle, fcs_int local_particles, fcs_float *positions,  fcs_float *charges)
 {
@@ -131,20 +262,20 @@ FCSResult fcs_memd_set_parameter(FCS handle, fcs_bool continue_on_errors, char *
 
   *matched = 0;
 
-/*  FCS_PARSE_IF_PARAM_THEN_FUNC3_GOTO_NEXT("", fcs_memd_set_box_size,                  FCS_PARSE_VAL(fcs_float), FCS_PARSE_VAL(fcs_float), FCS_PARSE_VAL(fcs_float));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_time_step,                 FCS_PARSE_VAL(fcs_float));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_total_number_of_particles, FCS_PARSE_VAL(fcs_int));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_local_number_of_particles, FCS_PARSE_VAL(fcs_int));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_init_flag,                 FCS_PARSE_VAL(fcs_int));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_mesh_size_1D,              FCS_PARSE_VAL(fcs_int));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_speed_of_light,            FCS_PARSE_VAL(fcs_float));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_permittivity,              FCS_PARSE_VAL(fcs_float));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_temperature,               FCS_PARSE_VAL(fcs_float));
-  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("", fcs_memd_set_bjerrum_length,            FCS_PARSE_VAL(fcs_float));*/
+  FCS_PARSE_IF_PARAM_THEN_FUNC3_GOTO_NEXT("memd_box_size",                  fcs_memd_set_box_size,                  FCS_PARSE_VAL(fcs_float), FCS_PARSE_VAL(fcs_float), FCS_PARSE_VAL(fcs_float));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_timestep",                  fcs_memd_set_time_step,                 FCS_PARSE_VAL(fcs_float));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_total_number_of_particles", fcs_memd_set_total_number_of_particles, FCS_PARSE_VAL(fcs_int));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_local_number_of_particles", fcs_memd_set_local_number_of_particles, FCS_PARSE_VAL(fcs_int));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_init_flag",                 fcs_memd_set_init_flag,                 FCS_PARSE_VAL(fcs_int));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_mesh",                      fcs_memd_set_mesh_size_1D,              FCS_PARSE_VAL(fcs_int));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_lightspeed",                fcs_memd_set_speed_of_light,            FCS_PARSE_VAL(fcs_float));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_permittivity",              fcs_memd_set_permittivity,              FCS_PARSE_VAL(fcs_float));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_temperature",               fcs_memd_set_temperature,               FCS_PARSE_VAL(fcs_float));
+  FCS_PARSE_IF_PARAM_THEN_FUNC1_GOTO_NEXT("memd_bjerrum_length",            fcs_memd_set_bjerrum_length,            FCS_PARSE_VAL(fcs_float));
 
   return FCS_RESULT_SUCCESS;
 
-/*next_param:*/
+next_param:
   *current = param;
   *next = cur;
 
